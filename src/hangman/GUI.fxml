@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -12,18 +13,18 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="465.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hangman.Controller">
    <children>
-      <Button fx:id="enterButton" layoutX="579.0" layoutY="361.0" mnemonicParsing="false" onAction="#input" text="Enter" />
-      <ImageView fx:id="hangmanImage" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/hangmanImage.jpeg" />
-         </image></ImageView>
-      <Text fx:id="wordText" layoutX="14.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="word">
+      <Button fx:id="enterButton" layoutX="692.0" layoutY="390.0" mnemonicParsing="false" onAction="#input" style="-fx-background-color: #D8D7CA;" text="Enter" />
+      <ImageView fx:id="hangmanImage" fitHeight="346.0" fitWidth="272.0" layoutX="14.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="wordText" fill="#D8D7CA" layoutX="14.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="word">
          <font>
             <Font size="50.0" />
          </font></Text>
-      <TextField fx:id="inputText" layoutX="432.0" layoutY="275.0" onAction="#input" promptText="Enter your guess here!" />
-      <Text fx:id="guessesRemaining" layoutX="328.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="guesses remaining" />
-      <Text fx:id="resultText" layoutX="375.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Awaiting your attempt..." />
-      <TextArea fx:id="gameOverText" layoutX="328.0" layoutY="4.0" prefHeight="261.0" prefWidth="417.0" />
+      <TextField fx:id="inputText" layoutX="574.0" layoutY="361.0" onAction="#input" promptText="Enter your guess here!" />
+      <Text fx:id="guessesRemaining" fill="#D8D7CA" layoutX="328.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="guesses remaining" />
+      <Text fx:id="resultText" fill="#D8D7CA" layoutX="328.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Awaiting your attempt..." />
+      <TextArea fx:id="gameOverText" editable="false" layoutX="328.0" layoutY="35.0" prefHeight="261.0" prefWidth="417.0" style="-fx-control-inner-background: #D8D7CA;" wrapText="true">
+         <font>
+            <Font size="21.0" />
+         </font></TextArea>
    </children>
 </AnchorPane>

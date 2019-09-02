@@ -26,18 +26,23 @@ class GameEngine {
         return "You have " + Math.abs(hangCount - 6) + " incorrect guess(es) remaining before you lose...";
     }
 
+    static int getHangCount(){
+        return hangCount;
+    }
+
     static String getGameResults(){
         String feedback;
-        if (losses > wins) {
-            feedback = " You aren't very good at this are you...";
+        feedback = "You have " + wins + " wins" + " and " + losses + " losses.";
+        /*if (losses > wins) {
+            feedback = "You have " + wins + " wins" + " and " + losses + " losses. " + "\n" + "You aren't very good at this are you...";
         }//end if
         else if (wins > losses) {
-            feedback = "You are adept at cheating death...";
+            feedback = "You have " + wins + " wins" + " and " + losses + " losses. " + "\n" + "You are adept at cheating death...";
         }//end else if
         else {
-            feedback = " Eh... You're average. How stale.";
-        }
-        return feedback + "\n" + "The words used so far have been: " + wordsUsed;
+            feedback = "You have " + wins + " wins" + " and " + losses + " losses. " + "\n" + "Eh... You're average. How stale.";
+        }*/
+        return feedback + "\n" + "The words used so far have been: " + wordsUsed + "\n" + "Enter 'play' or 'exit'";
     }
 
     public static void main(String[] args)      {
@@ -77,7 +82,7 @@ class GameEngine {
             return "Please enter an alphabetic letter. ";
         }
         if (guesses.contains(guess)) {
-            return "You have already guessed this character... Try another...";
+            return "You have already guessed '"+ guess + "'... Try another...";
         }//end if
         guesses.add(guess);
         //adds to correctGuesses and updates the blurred word
@@ -85,7 +90,7 @@ class GameEngine {
             correctGuesses.append(guess);
             blurredWord = chosenWord.replaceAll("[^ " + correctGuesses + "]", "*");
             if (!chosenWord.equalsIgnoreCase(blurredWord)) {
-                return "You have guessed correctly!";
+                return "'" + guess + "' is in the word. You have guessed correctly!";
             }//end if
         }//end if
         else {
@@ -93,16 +98,16 @@ class GameEngine {
             if (hangCount == 6){
                 losses++;
                 return "You have been hung! May you rest in peace..."
-                        + "\n" + " Would you like to play again?";
+                        + "\n" + "Would you like to play again?";
             }
-            return "Sorry, that letter is not in the word...";
+            return "Sorry, '" + guess + "' is not in the word...";
         }//end else
         if (chosenWord.equalsIgnoreCase(blurredWord)) {
             // GAME OVER
             wins++;
             return "You have successfully avoided death! Yay surviving!"
-                    + "\n" + " You had " + hangCount + " miss(es)."
-                    + "\n" + " Would you like to play again?";
+                    + "\n" + "You had " + hangCount + " miss(es)."
+                    + "\n" + "Would you like to play again?";
         }//end if
         return "Awaiting your attempt...";
     }//end guessAction

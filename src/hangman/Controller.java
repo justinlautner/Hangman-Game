@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +15,14 @@ public class Controller implements Initializable {
     @FXML private TextField inputText;
     @FXML private Text wordText, guessesRemaining, resultText;
     @FXML private TextArea gameOverText;
+    @FXML private ImageView hangmanImage;
+    private static Image empty = new Image("/assets/Hangman_Empty.png",160,160,false,true),
+            one = new Image("/assets/Hangman_One.png",160,160,false,true),
+            two = new Image("/assets/Hangman_Two.png",160,160,false,true),
+            three = new Image("/assets/Hangman_Three.png",160,160,false,true),
+            four = new Image("/assets/Hangman_Four.png",160,160,false,true),
+            five = new Image("/assets/Hangman_Five.png",160,160,false,true),
+            six = new Image("/assets/Hangman_Six.png",160,160,false,true);
 
     public Controller() {
     }
@@ -20,12 +30,12 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
         wordText.setText(GameEngine.getBlurredWord());
+        hangmanImage.setImage(empty);
         guessesRemaining.setText(GameEngine.getGuessesRemaining());
         gameOverText.setVisible(false);
     }
     //TODO: Add null input exception
-    //TODO: Format GUI
-    //TODO: Change how enter button affects textfield focusing
+    //TODO: Scale GUI items with resizing of window pane
     public void input() {
         String rawInput = inputText.getText();
         if (gameOverText.isVisible()){
@@ -37,27 +47,41 @@ public class Controller implements Initializable {
                 guessesRemaining.setVisible(true);
                 resultText.setVisible(true);
                 resultText.setText("Awaiting your attempt...");
-                inputText.setText("");
                 inputText.setPromptText("Enter your guess here!");
             }
         }
         else{
             char input = rawInput.charAt(0);
-            inputText.setText("");
             resultText.setText(GameEngine.guessAction(input));
             wordText.setText(GameEngine.getBlurredWord());
             guessesRemaining.setText(GameEngine.getGuessesRemaining());
 
-            if (resultText.getText().contains("Would you like to play again?")){
-                inputText.setPromptText("Enter 'play' or 'exit'");
-            }
             if (!wordText.getText().contains("*") || guessesRemaining.getText().contains("0")){
-                //wordText.setVisible(false);
+                inputText.setPromptText("Enter 'play' or 'exit'");
                 guessesRemaining.setVisible(false);
                 resultText.setVisible(false);
                 gameOverText.setVisible(true);
                 gameOverText.setText(resultText.getText() + "\n" + GameEngine.getGameResults());
             }
         }
+        int hangCount = GameEngine.getHangCount();
+        switch (hangCount){
+            case 1: hangmanImage.setImage(one);
+                break;
+            case 2: hangmanImage.setImage(two);
+                break;
+            case 3: hangmanImage.setImage(three);
+                break;
+            case 4: hangmanImage.setImage(four);
+                break;
+            case 5: hangmanImage.setImage(five);
+                break;
+            case 6: hangmanImage.setImage(six);
+                break;
+            default: hangmanImage.setImage(empty);
+                break;
+        }
+        inputText.setText("");
+        inputText.requestFocus();
     }
 }
