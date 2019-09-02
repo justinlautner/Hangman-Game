@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="465.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hangman.Controller">
+   <children>
+      <Button fx:id="enterButton" layoutX="579.0" layoutY="361.0" mnemonicParsing="false" onAction="#input" text="Enter" />
+      <ImageView fx:id="hangmanImage" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/hangmanImage.jpeg" />
+         </image></ImageView>
+      <Text fx:id="wordText" layoutX="14.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="word">
+         <font>
+            <Font size="50.0" />
+         </font></Text>
+      <TextField fx:id="inputText" layoutX="432.0" layoutY="275.0" onAction="#input" promptText="Enter your guess here!" />
+      <Text fx:id="guessesRemaining" layoutX="328.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="guesses remaining" />
+      <Text fx:id="resultText" layoutX="375.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Awaiting your attempt..." />
+      <TextArea fx:id="gameOverText" layoutX="328.0" layoutY="4.0" prefHeight="261.0" prefWidth="417.0" />
+   </children>
+</AnchorPane>
