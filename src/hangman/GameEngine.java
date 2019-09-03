@@ -33,19 +33,10 @@ class GameEngine {
     static String getGameResults(){
         String feedback;
         feedback = "You have " + wins + " wins" + " and " + losses + " losses.";
-        /*if (losses > wins) {
-            feedback = "You have " + wins + " wins" + " and " + losses + " losses. " + "\n" + "You aren't very good at this are you...";
-        }//end if
-        else if (wins > losses) {
-            feedback = "You have " + wins + " wins" + " and " + losses + " losses. " + "\n" + "You are adept at cheating death...";
-        }//end else if
-        else {
-            feedback = "You have " + wins + " wins" + " and " + losses + " losses. " + "\n" + "Eh... You're average. How stale.";
-        }*/
         return feedback + "\n" + "The words used so far have been: " + wordsUsed + "\n" + "Enter 'play' or 'exit'";
-    }
+    }//end getGameResults
 
-    public static void main(String[] args)      {
+    GameEngine()      {
         loadFile(input);
 
         chosenWord = wordSelection();
@@ -53,7 +44,7 @@ class GameEngine {
     }//end Main
 
     private static String wordSelection()    {
-        //Choose a hangman word at random
+        //Choose a hangman word at random from list
         double i = (Math.random() * hangman.size());
         int j = (int )Math.floor(i);
         String word = hangman.get(j);
@@ -80,12 +71,12 @@ class GameEngine {
         blurredWord = chosenWord.replaceAll("[^ " + correctGuesses + "]", "*");
         if (Character.isDigit(guess)){
             return "Please enter an alphabetic letter. ";
-        }
+        }//end if
         if (guesses.contains(guess)) {
             return "You have already guessed '"+ guess + "'... Try another...";
         }//end if
         guesses.add(guess);
-        //adds to correctGuesses and updates the blurred word
+        //If your guess is correct, make sure you cannot guess it again
         if (chosenWord.contains("" + guess) && !chosenWord.equalsIgnoreCase(blurredWord)) {
             correctGuesses.append(guess);
             blurredWord = chosenWord.replaceAll("[^ " + correctGuesses + "]", "*");
@@ -93,15 +84,17 @@ class GameEngine {
                 return "'" + guess + "' is in the word. You have guessed correctly!";
             }//end if
         }//end if
+        //Your guess is incorrect, end game or lessen guesses
         else {
             hangCount++;
             if (hangCount == 6){
                 losses++;
                 return "You have been hung! May you rest in peace..."
                         + "\n" + "Would you like to play again?";
-            }
+            }//end if
             return "Sorry, '" + guess + "' is not in the word...";
         }//end else
+        //If you guess the word in its entirety
         if (chosenWord.equalsIgnoreCase(blurredWord)) {
             // GAME OVER
             wins++;
@@ -113,15 +106,16 @@ class GameEngine {
     }//end guessAction
 
     static void GameOver(String playAgain)   {
+        //If user chose to exit, do so here
         if (playAgain.contains("exit")){
             System.exit(0);
-        }
+        }//end if
         //User has optioned to continue playing, add word used to bank and clear all variables for a replay
         hangCount = 0;
         guesses.clear();
         correctGuesses.setLength(0);
         chosenWord = wordSelection();
         blurredWord = chosenWord.replaceAll("[^ " + correctGuesses + "]", "*");
-    }
+    }//end GameOver
 
-}
+}//end GameEnding class

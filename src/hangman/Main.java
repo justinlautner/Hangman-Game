@@ -10,13 +10,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        GameEngine.main(null);
+        new GameEngine();
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         root.setStyle("-fx-background-color: #454545;");
         primaryStage.setTitle("Hangman");
         primaryStage.setScene(new Scene(root, 800, 475));
         primaryStage.show();
-    }
+    }//end start
 
 
     public static void main(String[] args) {

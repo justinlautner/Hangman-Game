@@ -38,6 +38,7 @@ public class Controller implements Initializable {
     //TODO: Scale GUI items with resizing of window pane
     public void input() {
         String rawInput = inputText.getText();
+        //This if-else ensures that if the game is over, the program catches 'play' or 'exit' input instead of a letter
         if (gameOverText.isVisible()){
             if (rawInput.toLowerCase().contains("play") || rawInput.toLowerCase().contains("exit")){
                 GameEngine.GameOver(rawInput);
@@ -48,22 +49,22 @@ public class Controller implements Initializable {
                 resultText.setVisible(true);
                 resultText.setText("Awaiting your attempt...");
                 inputText.setPromptText("Enter your guess here!");
-            }
-        }
+            }//end if
+        }//end if
+        //Resume normal function here
         else{
             char input = rawInput.charAt(0);
             resultText.setText(GameEngine.guessAction(input));
             wordText.setText(GameEngine.getBlurredWord());
             guessesRemaining.setText(GameEngine.getGuessesRemaining());
-
             if (!wordText.getText().contains("*") || guessesRemaining.getText().contains("0")){
                 inputText.setPromptText("Enter 'play' or 'exit'");
                 guessesRemaining.setVisible(false);
                 resultText.setVisible(false);
                 gameOverText.setVisible(true);
                 gameOverText.setText(resultText.getText() + "\n" + GameEngine.getGameResults());
-            }
-        }
+            }//end if
+        }//end if
         int hangCount = GameEngine.getHangCount();
         switch (hangCount){
             case 1: hangmanImage.setImage(one);
@@ -80,8 +81,8 @@ public class Controller implements Initializable {
                 break;
             default: hangmanImage.setImage(empty);
                 break;
-        }
+        }//end switch
         inputText.setText("");
         inputText.requestFocus();
-    }
-}
+    }//end input
+}//end Controller
