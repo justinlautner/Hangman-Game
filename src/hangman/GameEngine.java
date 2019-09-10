@@ -68,7 +68,9 @@ class GameEngine {
     }//end loadFile
 
     static String guessAction(char guess)    {
+        //Create blurred word to show to user
         blurredWord = chosenWord.replaceAll("[^ " + correctGuesses + "]", "*");
+        //Input error catching
         if (Character.isDigit(guess)){
             return "Please enter an alphabetic letter. ";
         }//end if
@@ -94,7 +96,7 @@ class GameEngine {
             }//end if
             return "Sorry, '" + guess + "' is not in the word...";
         }//end else
-        //If you guess the word in its entirety
+        //If you guess the word in its entirety, win sequence
         if (chosenWord.equalsIgnoreCase(blurredWord)) {
             // GAME OVER
             wins++;

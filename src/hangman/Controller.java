@@ -51,7 +51,7 @@ public class Controller implements Initializable {
                 inputText.setPromptText("Enter your guess here!");
             }//end if
         }//end if
-        //Resume normal function here
+        //Resume normal function here... Input char and update GUI accordingly
         else{
             char input = rawInput.charAt(0);
             resultText.setText(GameEngine.guessAction(input));
@@ -65,6 +65,7 @@ public class Controller implements Initializable {
                 gameOverText.setText(resultText.getText() + "\n" + GameEngine.getGameResults());
             }//end if
         }//end if
+        //Change ImageView based on amount of incorrect answers
         int hangCount = GameEngine.getHangCount();
         switch (hangCount){
             case 1: hangmanImage.setImage(one);
@@ -82,6 +83,7 @@ public class Controller implements Initializable {
             default: hangmanImage.setImage(empty);
                 break;
         }//end switch
+        //Prevents having to click the text box after every input
         inputText.setText("");
         inputText.requestFocus();
     }//end input

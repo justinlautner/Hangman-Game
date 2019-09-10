@@ -10,6 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        //Create GUI and game engine
         new GameEngine();
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         root.setStyle("-fx-background-color: #454545;");
